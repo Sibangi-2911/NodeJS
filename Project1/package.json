@@ -1,0 +1,22 @@
+{
+  "name": "project1",
+  "version": "1.0.0",
+  "description": "Full-Stack NodeJS Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sibangi-2911/NodeJS.git"
+  },
+  "author": "Sibangi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Sibangi-2911/NodeJS/issues"
+  },
+  "homepage": "https://github.com/Sibangi-2911/NodeJS#readme",
+  "dependencies": {
+    "date-fns": "^4.1.0"
+  }
+}
