@@ -15,5 +15,8 @@
     "url": "https://github.com/Sibangi-2911/NodeJS/issues"
   },
   "homepage": "https://github.com/Sibangi-2911/NodeJS#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "url": "^0.11.4"
+  }
 }
