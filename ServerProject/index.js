@@ -1,16 +1,21 @@
 //make a server
 const http = require("http");
 const fs = require("fs");
+const url = require("url");
 //we need a handler to handle the requests
 const myServer = http.createServer((req,res)=>{
+  if(req.url=='/favicon.ico') return res.end();
   const log = `${Date.now()}: ${req.url} New Request received \n`;
+  const myurl = url.parse(req.url,true);
+  console.log(myurl);
   fs.appendFile("./log.txt",log,(err, data)=>{
-      switch(req.url){
+      switch(myurl.pathname){
         case "/":
           res.end("Home Page");
           break;
         case "/about":
-          res.end("I am Sibangi");
+          const username = myurl.query.myname;
+          res.end(` Hi!!! ${username}`);
           break;
         case "/contacts":
           res.end("010028564");
