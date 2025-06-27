@@ -1,1 +1,9 @@
-GET http://localhost:3001
+GET http://localhost:3001/nodejs/?order=asc
+
+POST http://localhost:3001/nodejs/?order=asc
+
+PATCH http://localhost:3001/nodejs/?order=asc
+
+PUT http://localhost:3001/nodejs/?order=asc
+
+DELETE http://localhost:3001/nodejs/?order=asc
