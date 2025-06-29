@@ -1,4 +1,4 @@
-We have to create a REST API-JSON
+We have to create a REST API-JSON Project
 
 GET/users - Html document render
 GET /api/users - List all users JSON
