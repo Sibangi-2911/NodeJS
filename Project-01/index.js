@@ -10,7 +10,21 @@ const PORT = 8000;
 //middleware plugin
 app.use(express.urlencoded({extended: false}));
 
+app.use((req,res,next)=>{
+  fs.appendFile("log.txt",`\n ${Date.now()}: ${req.ip}: ${req.method}: ${req.path}`,(err,data)=>{
+    console.log("Hello from middleware 1");
+    req.myUserName = "SIBANGI";
+    next(); //this calls the next middleware function or the next router
+  });
+})
+
+app.use((req,res,next)=>{
+  console.log("Hello from middleware2 ",req.myUserName);
+  next();
+})
+
 app.get("/api/users",(req,res)=>{
+  console.log("I  am into get request method ",req.myUserName);
   return res.json(users);
 });
 
