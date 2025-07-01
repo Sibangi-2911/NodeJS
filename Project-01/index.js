@@ -25,6 +25,8 @@ app.use((req,res,next)=>{
 
 app.get("/api/users",(req,res)=>{
   console.log("I  am into get request method ",req.myUserName);
+  res.setHeader("X-myName","Sibangi Boxipatro"); //always add X to custom headers
+  console.log(req.headers);
   return res.json(users);
 });
 
