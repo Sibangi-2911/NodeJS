@@ -10,3 +10,11 @@
  1751276796048: ::1: GET: /api/users
  1751276917180: ::1: GET: /api/users
  1751277028575: ::1: GET: /api/users
+ 1751364224860: ::1: POST: /api/users/1004
+ 1751364238001: ::1: POST: /api/users
+ 1751364399347: ::1: GET: /api/users
+ 1751364414311: ::1: GET: /api/users/1002
+ 1751364804042: ::1: POST: /api/users/1002
+ 1751364847283: ::1: POST: /api/users/1002
+ 1751364872782: ::1: POST: /api/users
+ 1751365069713: ::1: GET: /api/users/1007
