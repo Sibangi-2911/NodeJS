@@ -1,3 +1,15 @@
 Schema - Define the structure
 using the schema model is made
 using the model  we do CRUD operations.(create,read,update,delete)
+
+
+//This was written under post when connected to database that was only within the file that is using mockaroo
+const users = require("./MOCK_DATA.json");
+users.push({...body, id: users.length+1});
+  fs.writeFile("./MOCK_DATA.json", JSON.stringify(users), (err) => {
+  if (err) {
+    return res.status(500).json({ error: "Failed to write data" });
+  }
+  return res.status(201).json({ status: "User added successfully",id: users.length});
+});
+  console.log("Body: ",body);
