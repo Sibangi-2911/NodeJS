@@ -18,3 +18,15 @@
  1751364847283: ::1: POST: /api/users/1002
  1751364872782: ::1: POST: /api/users
  1751365069713: ::1: GET: /api/users/1007
+ 1751451570838: ::1: POST: /api/users
+ 1751451751994: ::1: POST: /api/users
+ 1751452158853: ::1: GET: /api/users
+ 1751452202739: ::1: GET: /users
+ 1751452273814: ::1: POST: /api/users
+ 1751452318988: ::1: GET: /users
+ 1751452449609: ::1: GET: /api/users
+ 1751452703216: ::1: GET: /api/users/686507b245a1a98ab212fdf8
+ 1751453090650: ::1: PATCH: /api/users/:id
+ 1751453112066: ::1: PATCH: /api/users/:id
+ 1751453158717: ::1: PATCH: /api/users/686507b245a1a98ab212fdf8
+ 1751453352932: ::1: DELETE: /api/users/686507b245a1a98ab212fdf8
