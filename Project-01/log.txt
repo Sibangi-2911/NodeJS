@@ -30,3 +30,9 @@
  1751453112066: ::1: PATCH: /api/users/:id
  1751453158717: ::1: PATCH: /api/users/686507b245a1a98ab212fdf8
  1751453352932: ::1: DELETE: /api/users/686507b245a1a98ab212fdf8
+ 1751561565644: ::1: POST: /users
+ 1751561575562: ::1: GET: /users
+ 1751561787524: ::1: GET: /api/user
+ 1751562058906: ::1: GET: /api/users
+ 1751562115127: ::1: POST: /api/users
+ 1751562131594: ::1: GET: /api/users
