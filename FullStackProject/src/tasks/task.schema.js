@@ -1,5 +1,5 @@
 //how thw structure of one task is going to look
-const {Schema} = require("mongoose");
+const {Schema, model} = require("mongoose");
 
 const taskSchema = new Schema({
   title: {
@@ -12,7 +12,7 @@ const taskSchema = new Schema({
     type:String,
     required:[true, "Task description is required"],
     trim: true,
-    maxLength:[500, "Dexcription should not be more than 500 characters"],
+    maxLength:[500, "Description should not be more than 500 characters"],
   },
   status: {
     type:String,
@@ -29,9 +29,12 @@ const taskSchema = new Schema({
   dueDate: {
     type:Date,
     required:[true, "Task due date is required"],
-  },
-  createdAt: {
-    type:Date,
-    default:Date.now,
   }
-});
+},
+{timestamps:true, versionKey:false}
+);
+
+//model
+const Task = model("Task", taskSchema);
+
+module.exports = Task;
