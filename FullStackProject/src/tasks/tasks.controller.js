@@ -1,33 +1,27 @@
 const {StatusCodes, ReasonPhrases} = require("http-status-codes");
+const createTaskProvider = require("./providers/createTask.provider.js");
+const getTasksProvider = require("./providers/getTasks.provider.js");
+const updateTaskProvider = require("./providers/updateTask.provider.js");
+const deleteTaskProvider = require("./providers/deleteTask.provider.js");
 
-function handleGetTasks(req,res){
-  let response = [
-    {
-      "title": "Title of the task1",
-      "date": "2025-01-01T12:00:00Z",
-      "description": "Task1 is to be done",
-      "priority": "normal",
-      "status": "todo"
-    },
-    {
-      "title": "Title of the task2",
-      "date": "2025-01-01T12:00:00Z",
-      "description": "Task2 is to be done.",
-      "priority": "normal",
-      "status": "todo"
-    },
-  ];
-  res.status(StatusCodes.OK).json(response);
+async function handleGetTasks(req,res){
+  const tasks = await getTasksProvider(req,res);
+  res.status(StatusCodes.OK).json(tasks);
 }
-function handlePostTasks(req,res){
-  console.log("Request Body:", req.body);
-  res.send("POST tasks controller");
+
+async function handlePostTasks(req,res){
+  const task = await createTaskProvider(req,res);
+  res.status(StatusCodes.CREATED).json(task);
 }
-function handlePatchTasks(req,res){
-  res.send("PATCH tasks controller");
+
+async function handlePatchTasks(req,res){
+  const updateTask = await updateTaskProvider(req,res);
+  res.status(StatusCodes.OK).json(updateTask);
 }
-function handleDeleteTasks(req,res){
-  res.send("DELETE tasks controller");
+
+async function handleDeleteTasks(req,res){
+  const deleteTask = await deleteTaskProvider(req,res);
+  res.status(StatusCodes.OK).json(deleteTask);
 }
 
 module.exports = {handleGetTasks, handlePostTasks, handlePatchTasks, handleDeleteTasks};
