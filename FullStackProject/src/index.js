@@ -7,6 +7,7 @@ const { StatusCodes } = require("http-status-codes");
 const taskRouter = require("./tasks/tasks.router.js");
 const authRouter = require("./auth/auth.router.js");
 const usersRouter = require("./users/users.router.js");
+const mongoose = require("mongoose");
 const cors = require("cors");
 
 const app = express();
@@ -42,6 +43,22 @@ app.use((req,res)=>{
   res.status(StatusCodes.NOT_FOUND).json(null);
 })
 
-app.listen(port,()=>{
-  console.log(`App listens at port no. ${port}`);
+//connection to mongodb
+async function bootstrap() {
+  try{
+    await mongoose.connect(
+      "mongodb+srv://Sibangi:Pragya%402911@nodejs.uoym2z1.mongodb.net/",
+      {dbName: "fullstackTasks"}
+    );
+    console.log("Connected to MongoDB");
+    //the app will only start if it is connected to mongodb
+    app.listen(port,()=>{
+      console.log(`App listens at port no. ${port}`);
 });
+  }
+  catch(error){
+    console.log(error);
+    process.exit(1); //process is used to gracefully exit the code in case of any error
+  }
+}
+bootstrap();
