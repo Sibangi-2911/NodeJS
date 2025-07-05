@@ -1,3 +1,4 @@
+require("dotenv").config(); // This should be before using process.env
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
@@ -45,20 +46,21 @@ app.use((req,res)=>{
 
 //connection to mongodb
 async function bootstrap() {
-  try{
-    await mongoose.connect(
-      "mongodb+srv://<usernamepassword>mongodb.net/",
-      {dbName: "fullstackTasks"}
-    );
+  try {
+    await mongoose.connect(process.env.MONGODB_URI, {
+      dbName: process.env.DB_NAME || "fullstackTasks",
+    });
+
     console.log("Connected to MongoDB");
-    //the app will only start if it is connected to mongodb
-    app.listen(port,()=>{
+
+    app.listen(port, () => {
       console.log(`App listens at port no. ${port}`);
-});
-  }
-  catch(error){
-    console.log(error);
-    process.exit(1); //process is used to gracefully exit the code in case of any error
+    });
+  } catch (err) {
+    console.error("MongoDB connection failed:", err.message);
+    process.exit(1);
   }
 }
+
+
 bootstrap();
