@@ -47,7 +47,7 @@ app.use((req,res)=>{
 async function bootstrap() {
   try{
     await mongoose.connect(
-      "mongodb+srv://Sibangi:Pragya%402911@nodejs.uoym2z1.mongodb.net/",
+      "mongodb+srv://<usernamepassword>mongodb.net/",
       {dbName: "fullstackTasks"}
     );
     console.log("Connected to MongoDB");
