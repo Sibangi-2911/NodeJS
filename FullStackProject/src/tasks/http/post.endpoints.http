@@ -3,7 +3,7 @@ POST http://localhost:3001/tasks
 Content-Type: application/json
 
 {
-  "title": "Title of the task3",
+  "title": "Title of the task7",
   "dueDate": "2025-01-01T12:00:00Z",
   "description": "Hello My name is Sibangi",
   "priority": "normal",
