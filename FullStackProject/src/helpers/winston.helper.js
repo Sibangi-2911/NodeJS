@@ -20,12 +20,12 @@ const transports = [
   }),
   new winston.transports.File({
     level: "info",
-    filename: path.join(__dirname, "..", "info.log"),
+    filename: path.join(__dirname, "../..", "info.log"),
     format: winston.format.json(),
   }),
   new winston.transports.File({
     level: "error",
-    filename: path.join(__dirname, "..", "error.log"),
+    filename: path.join(__dirname, "../..", "error.log"),
     format: winston.format.json(),
   }),
 ]
