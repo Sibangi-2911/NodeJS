@@ -13,8 +13,7 @@ async function handlePostTasks(req,res){
 }
 
 async function handlePatchTasks(req,res){
-  const updateTask = await updateTaskProvider(req,res);
-  res.status(StatusCodes.OK).json(updateTask);
+  return await updateTaskProvider(req,res);
 }
 
 async function handleDeleteTasks(req,res){
