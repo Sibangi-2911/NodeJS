@@ -1,4 +1,3 @@
-require("dotenv").config(); // This should be before using process.env
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
@@ -10,11 +9,20 @@ const authRouter = require("./auth/auth.router.js");
 const usersRouter = require("./users/users.router.js");
 const mongoose = require("mongoose");
 const expressWinstonLogger = require("./middleware/expressWinston.middleware.js");
+const dotenv = require("dotenv");// This should be before using process.env
 const cors = require("cors");
+const configureApp = require("./settings/config.js");
 
+process.env.NODE_ENV = process.env.NODE_ENV || "development";
+const envFile = `.env.${process.env.NODE_ENV}`;
+
+dotenv.config({path: envFile});
+
+console.log(process.env.TEST_VARIABLE);
 
 const app = express();
-const port = 3001;
+const port = parseInt(process.env.PORT);
+console.log(process.env.NODE_ENV);
 
 /*const middleware = function(req,res,next){
   req.info = {appname: "Tasks Manager", author: "Sibangi"};
@@ -22,36 +30,13 @@ const port = 3001;
 };
 app.use(middleware);*/
 app.use(express.json()); // this middleware converts the incoming request body into json
-
-//on;y to these origins the resources could be shared
-const corsOptions = {
-  origin: ["example.com","example2.com"],
-};
-app.use(cors()); //include all origins only during development otherwise specify clear origins from where the request can be sent
-
-//flag a means append the next user activty
-let accessLogStream = fs.createWriteStream(path.join(__dirname,"..","access.log"),{
-  flag:'a',
-});
-app.use(morgan("combined", {stream: accessLogStream}));
-app.use(responseFormatter);
-app.use(expressWinstonLogger);
-
-//attach the router here that is define the routes
-app.use("/", taskRouter);
-app.use("/auth", authRouter);
-app.use("/users", usersRouter);
-
-//if resource/request not found
-app.use((req,res)=>{
-  res.status(StatusCodes.NOT_FOUND).json(null);
-})
+configureApp(app);
 
 //connection to mongodb
 async function bootstrap() {
   try {
-    await mongoose.connect(process.env.MONGODB_URI, {
-      dbName: process.env.DB_NAME || "fullstackTasks",
+    await mongoose.connect(process.env.DATABASE_URL, {
+      dbName: process.env.DATABASE_NAME,
     });
 
     console.log("Connected to MongoDB");
