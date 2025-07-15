@@ -29,6 +29,9 @@ const taskSchema = new Schema({
   dueDate: {
     type:Date,
     required:[true, "Task due date is required"],
+  },
+  user: {
+    type: Schema.Types.ObjectId, ref: "User", required:true
   }
 },
 {timestamps:true, versionKey:false}
