@@ -1,28 +1,40 @@
-const {getReasonPhrase} = require("http-status-codes");
-const { error } = require("winston");
+const { StatusCodes, getReasonPhrase } = require("http-status-codes");
 
-function responseFormatter(req,res,next){
+function responseFormatter(req, res, next) {
   const originalJson = res.json;
 
-  res.json = (data)=>{
+  res.json = (data) => {
+    // Make sure status code is preserved correctly
+    const statusCode = res.statusCode || StatusCodes.OK;
+
+    // Build response object
     const response = {
-      status: res.statusCode >=200 && res.statusCode<300 ? "success":"error",
-      statusCode: res.statusCode,
-      message : getReasonPhrase(res.statusCode),
-      /*data:res.statusCode >=200 && res.statusCode<300 ? data : null,
-      error:res.statusCode >=200 && res.statusCode<300 ? null: data,*/
+      status: statusCode >= 200 && statusCode < 300 ? "success" : "error",
+      statusCode,
+      message: getReasonPhrase(statusCode),
     };
-    if(res.statusCode >=200 && res.statusCode<300){
-      response.data = data.pagination ? data.data : data;
+
+    // Set custom message if available in `reason` field
+    if (statusCode >= 300) {
+      response.error = data;
+
+      if (data && typeof data === "object" && data.reason) {
+        response.message = data.reason;
+      } else if (typeof data === "string") {
+        response.message = data;
+      }
+    } else {
+      // For successful responses
+      response.data = data?.pagination ? data.data : data;
+      if (data?.pagination) {
+        response.pagination = data.pagination;
+      }
     }
-    if(res.statusCode>300){
-      response.error = error;
-    }
-    if(data.pagination){
-      response.pagination = data.pagination;
-    }
-    originalJson.call(res,response); // res the original object is now replaced by response
+
+    originalJson.call(res, response);
   };
+
   next();
 }
+
 module.exports = responseFormatter;
