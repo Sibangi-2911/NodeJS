@@ -9,8 +9,7 @@ const createTaskValidator = [
   body("description", "The description cannot be empty and needs to be a string").isString().notEmpty().trim(),
   body("description", "The description cannot be more than 500 characters.").isLength({max:500}),
   body("priority").isIn(["low","normal","high"]),
-  body("status").isIn(["todo","inProgress","completed"]),
-  body("user").notEmpty().isMongoId(),
+  body("status").isIn(["todo","inProgress","completed"])
 ];
 
 module.exports = createTaskValidator;
