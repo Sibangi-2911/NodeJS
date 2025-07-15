@@ -1,12 +1,12 @@
 ### POST request
 POST http://localhost:3001/tasks
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2ODc2MDFhYTM4OWVjOWE3Yzg0MGM0YjUiLCJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzUyNTg1NjU3LCJleHAiOjE3NTI2NzIwNTd9.Ts-oZBiXeh9Ie5wQrLyW3-FRknSy-_g9n3CpFzaHm_U
 
 {
-  "title": "Task with a user1",
+  "title": "Task with a user1 bearer",
   "dueDate": "2025-01-01T12:00:00Z",
   "description": "Hello My name is Sibangi",
   "priority": "normal",
-  "status": "todo",
-  "user": "6865679a527cf028ef748a60"
+  "status": "todo"
 }
