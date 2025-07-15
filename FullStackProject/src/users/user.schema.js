@@ -44,32 +44,8 @@ const userSchema = Schema({
   password: {
     type: String,
     required: [true, "Password is required"],
-    minlength: [8, "Password must be at least 8 characters long"],
-    validate: {
-      validator: function (password) {
-        // Regular expression to validate the password
-        /** 
-         * Regular Expression: The regular expression ^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$ used in the validation function checks for:
-
-        (?=.*\d): at least one digit.
-        (?=.*[!@#$%^&*]): at least one special character from the set !@#$%^&*.
-        (?=.*[a-z]): at least one lowercase alphabetical character.
-        (?=.*[A-Z]): at least one uppercase alphabetical character.
-        .{8,}: at least 8 characters of any type.
-         * 
-         */
-        return /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(
-          password
-        );
       },
-      message: () =>
-        "Password must include at least one number, one uppercase letter, one lowercase letter, and one special character.",
-    },
-  },
-},
-{timestamps:true, versionKey:false}
-);
-
+});
 //model
 const User = model("User", userSchema);
 
