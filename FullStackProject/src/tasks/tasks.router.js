@@ -6,10 +6,11 @@ const createTaskValidator = require("./validators/createTask.validator.js");
 const getTasksValidator = require("./validators/getTasks.validator.js");
 const updateTaskValidator = require("./validators/updateTask.validator.js");
 const deleteTaskValidator = require("./validators/deleteTask.validator.js");
+const authenticateToken = require("../middleware/authenticateToken.middleware.js");
 
 const taskRouter = express.Router();
 
-taskRouter.get("/tasks",getTasksValidator, (req,res)=>{
+taskRouter.get("/tasks",[getTasksValidator, authenticateToken], (req,res)=>{
   const result = validationResult(req);
   if(result.isEmpty()){
     return taskController.handleGetTasks(req,res);
@@ -18,7 +19,7 @@ taskRouter.get("/tasks",getTasksValidator, (req,res)=>{
   }
 });
 
-taskRouter.post("/tasks", createTaskValidator ,(req,res)=>{ 
+taskRouter.post("/tasks", [createTaskValidator,authenticateToken] ,(req,res)=>{ 
   const result = validationResult(req);
   if(result.isEmpty()){
     return taskController.handlePostTasks(req,res);
@@ -28,7 +29,7 @@ taskRouter.post("/tasks", createTaskValidator ,(req,res)=>{
 }
 );
 
-taskRouter.patch("/tasks", updateTaskValidator, (req,res)=>{ 
+taskRouter.patch("/tasks", [updateTaskValidator,authenticateToken], (req,res)=>{ 
   const result = validationResult(req);
   if(result.isEmpty()){
     return taskController.handlePatchTasks(req,res);
@@ -37,7 +38,7 @@ taskRouter.patch("/tasks", updateTaskValidator, (req,res)=>{
   }
 });
 
-taskRouter.delete("/tasks", deleteTaskValidator, (req,res)=>{
+taskRouter.delete("/tasks", [deleteTaskValidator,authenticateToken], (req,res)=>{
   const result = validationResult(req);
   if(result.isEmpty()){
     return taskController.handleDeleteTasks(req,res);
