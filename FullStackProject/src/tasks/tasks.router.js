@@ -19,6 +19,65 @@ taskRouter.get("/tasks",[getTasksValidator, authenticateToken], (req,res)=>{
   }
 });
 
+/**
+ * @swagger
+ * 
+ * components:
+ *  securitySchemes:
+ *   bearerAuth:
+ *    type: http
+ *    scheme: bearer
+ *    bearerFormat: JWT
+ * /tasks:
+ *  post:
+ *   summary: Create a new task
+ *   tags: [Tasks]
+ *   security:
+ *    - bearerAuth: []
+ *   requestBody:
+ *    required: true
+ *    content:
+ *     application/json:
+ *      schema:
+ *       $ref: '#/components/schemas/Task'
+ *   responses:
+ *    201:
+ *     description: Task created successfully
+ *     content:
+ *      application/json:
+ *       example:
+ *        status: success
+ *        statusCode: 201
+ *        message: Created
+ *        data:
+ *         _id: 68674e34318cd4ce7036b659
+ *         title: Create a new video
+ *         description: A video about full stack web development
+ *         status: todo
+ *         priority: normal
+ *         dueDate: 2025-01-01T12:00:00Z
+ *    401:
+ *     description: Not Authorized Error
+ *     content:
+ *      application/json:
+ *       example:
+ *        status: error
+ *        statusCode: 401
+ *        message: Unauthorized
+ *        error:
+ *         message: You are not authorised to perform this request
+ *    403:
+ *     description: Forbidden Error
+ *     content:
+ *      application/json:
+ *       example:
+ *        status: error
+ *        statusCode: 403
+ *        message: Forbidden
+ *        error:
+ *         message: Please login again!!! Invalid token
+ */
+
 taskRouter.post("/tasks", [createTaskValidator,authenticateToken] ,(req,res)=>{ 
   const result = validationResult(req);
   if(result.isEmpty()){
