@@ -7,6 +7,8 @@ const taskRouter = require("../tasks/tasks.router.js");
 const authRouter = require("../auth/auth.router.js");
 const usersRouter = require("../users/users.router.js");
 const expressWinstonLogger = require("../middleware/expressWinston.middleware.js");
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpecs = require("./swagger.config.js");
 const cors = require("cors");
 
 
@@ -29,6 +31,9 @@ function configureApp(app){
   app.use("/", taskRouter);
   app.use("/auth", authRouter);
   app.use("/users", usersRouter);
+
+  //create a new website for documentation
+  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs))
 
   //if resource/request not found
   app.use((req,res)=>{
