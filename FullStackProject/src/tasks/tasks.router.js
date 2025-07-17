@@ -10,6 +10,79 @@ const authenticateToken = require("../middleware/authenticateToken.middleware.js
 
 const taskRouter = express.Router();
 
+/**
+ * @swagger
+ * 
+ * components:
+ *  securitySchemes:
+ *   bearerAuth:
+ *    type: http
+ *    scheme: bearer
+ *    bearerFormat: JWT
+ * /tasks:
+ *  get:
+ *   summary: Get all tasks
+ *   tags: [Tasks]
+ *   security:
+ *    - bearerAuth: []
+ *   parameters:
+ *    - in: query
+ *      name: limit
+ *      schema:
+ *       type: integer
+ *       default: 10
+ *      description: The number of tasks needed in a single response
+ *    - in: query
+ *      name: page
+ *      schema:
+ *       type: integer
+ *       default: 1
+ *      description: The page number of the tasks response
+ *    - in: query
+ *      name: order
+ *      schema:
+ *       type: string
+ *       default: 'asc'
+ *       enum: ['asc', 'dsc']
+ *      description: Order of tasks
+ *   responses:
+ *    200:
+ *     description: Task created successfully
+ *     content:
+ *      application/json:
+ *       example:
+ *        status: success
+ *        statusCode: 200
+ *        message: Ok
+ *        data:
+ *         - _id: 68674e34318cd4ce7036b659
+ *           title: Create a new video
+ *           description: A video about full stack web development
+ *           status: todo
+ *           priority: normal
+ *           dueDate: 2025-01-01T12:00:00Z
+ *    401:
+ *     description: Not Authorized Error
+ *     content:
+ *      application/json:
+ *       example:
+ *        status: error
+ *        statusCode: 401
+ *        message: Unauthorized
+ *        error:
+ *         message: You are not authorised to perform this request
+ *    403:
+ *     description: Forbidden Error
+ *     content:
+ *      application/json:
+ *       example:
+ *        status: error
+ *        statusCode: 403
+ *        message: Forbidden
+ *        error:
+ *         message: Please login again!!! Invalid token
+ */
+
 taskRouter.get("/tasks",[getTasksValidator, authenticateToken], (req,res)=>{
   const result = validationResult(req);
   if(result.isEmpty()){
