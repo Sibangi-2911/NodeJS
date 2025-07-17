@@ -2,7 +2,7 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const {connectToMongodb} = require("./connect.js");
-const { restrictToLoggedinUserOnly, checkAuth } = require("./middlewares/auth.js");
+const { checkForAuthentication, restrictTo } = require("./middlewares/auth.js");
 const urlRoute = require("./routes/url.js");
 const staticRouter = require("./routes/staticRouter.js");
 const userRoute = require("./routes/user.js");
@@ -22,6 +22,7 @@ app.set("views", path.resolve("./views"));
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(cookieParser());
+app.use(checkForAuthentication);
 
 //html page
 /*app.get("/test", async(req,res)=>{
@@ -31,9 +32,9 @@ app.use(cookieParser());
   });
 });*/
 
-app.use("/url",restrictToLoggedinUserOnly, urlRoute);
+app.use("/url",restrictTo(["NORMAL","ADMIN"]),urlRoute);
 
-app.use("/",checkAuth,staticRouter);
+app.use("/",staticRouter);
 
 app.use("/user",userRoute);
 
