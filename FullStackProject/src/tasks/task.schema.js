@@ -83,3 +83,47 @@ module.exports = Task;
  *     priority: normal
  *     dueDate: 2025-01-01T12:00:00Z
  */
+
+
+/**
+ * @swagger
+ * 
+ * components:
+ *  schemas:
+ *   TaskUpdate:
+ *    type: object
+ *    required:
+ *     - _id
+ *    properties:
+ *     _id:
+ *      type: string
+ *      description: The MongoDb objectId of task
+ *      format: objectId
+ *     title:
+ *      type: string
+ *      description: The title of the task
+ *      maxLength: 100
+ *     description:
+ *      type: string
+ *      description: The description of the task
+ *      maxLength: 500
+ *     status:
+ *      type: string
+ *      description: The status of the task
+ *      enum: ["todo","inProgress","completed"]
+ *     priority:
+ *      type: string
+ *      description: The priority of task
+ *      enum: ["low","normal","high"]
+ *     dueDate:
+ *      type: string
+ *      format: ISO8601 Date String
+ *      description: The due date for the task
+ *    example:
+ *     _id: 68674e34318cd4ce7036b659
+ *     title: Create a new video
+ *     description: A video about full stack web development
+ *     status: todo
+ *     priority: normal
+ *     dueDate: 2025-01-01T12:00:00Z
+ */
