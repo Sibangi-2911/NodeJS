@@ -229,6 +229,61 @@ taskRouter.patch("/tasks", [updateTaskValidator,authenticateToken], (req,res)=>{
   }
 });
 
+/**
+ * @swagger
+ * 
+ * components:
+ *  securitySchemes:
+ *   bearerAuth:
+ *    type: http
+ *    scheme: bearer
+ *    bearerFormat: JWT
+ * /tasks:
+ *  delete:
+ *   summary: Delete a task
+ *   tags: [Tasks]
+ *   security:
+ *    - bearerAuth: []
+ *   requestBody:
+ *    required: true
+ *    content:
+ *     application/json:
+ *      schema:
+ *       $ref: '#/components/schemas/TaskDelete'
+ *   responses:
+ *    200:
+ *     description: Task deleted successfully
+ *     content:
+ *      application/json:
+ *       example:
+ *        status: success
+ *        statusCode: 200
+ *        message: Ok
+ *        data:
+ *         acknowledged: true
+ *         deleteCount: 1
+ *    401:
+ *     description: Not Authorized Error
+ *     content:
+ *      application/json:
+ *       example:
+ *        status: error
+ *        statusCode: 401
+ *        message: Unauthorized
+ *        error:
+ *         message: You are not authorised to perform this request
+ *    403:
+ *     description: Forbidden Error
+ *     content:
+ *      application/json:
+ *       example:
+ *        status: error
+ *        statusCode: 403
+ *        message: Forbidden
+ *        error:
+ *         message: Please login again!!! Invalid token
+ */
+
 taskRouter.delete("/tasks", [deleteTaskValidator,authenticateToken], (req,res)=>{
   const result = validationResult(req);
   if(result.isEmpty()){
