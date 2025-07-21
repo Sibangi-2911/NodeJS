@@ -1,0 +1,23 @@
+{
+  "name": "discord-bot",
+  "version": "1.0.0",
+  "description": "A Discord Bot",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sibangi-2911/NodeJS.git"
+  },
+  "author": "Sibangi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sibangi-2911/NodeJS/issues"
+  },
+  "homepage": "https://github.com/Sibangi-2911/NodeJS#readme",
+  "dependencies": {
+    "discord.js": "^14.21.0",
+    "dotenv": "^17.2.0"
+  }
+}
