@@ -9,7 +9,7 @@ async function createUserProvider(req, res) {
   const validatedData = matchedData(req);
 
   try {
-    const existingUser = await User.findOne({ email: validatedData.email.trim().toLowerCase() });
+    const existingUser = await getUserByEmail(validatedData.email)
 
     if (existingUser) {
       console.log("User already exists:", existingUser.email);
