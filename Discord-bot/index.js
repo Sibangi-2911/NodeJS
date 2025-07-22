@@ -12,6 +12,11 @@ client.on("messageCreate", (message)=>{
   });
 });
 
+client.on("interactionCreate", interaction=>{
+  console.log(interaction);
+  interaction.reply("Pong!!!");
+})
+
 client.login(
   process.env.DISCORD_BOT_TOKEN
 );
