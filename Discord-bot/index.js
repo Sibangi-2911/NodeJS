@@ -7,6 +7,12 @@ const client =  new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBi
 client.on("messageCreate", (message)=>{
   console.log(message.content);
   if(message.author.bot) return;
+  if(message.content.startsWith("create")){
+    const url = message.content.split("create")[1];
+    return message.reply({
+      content: "Generating Short ID for URL " + url,
+    })
+  }
   message.reply({
     content: "Hi from Bot!!",
   });
